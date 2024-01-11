@@ -1,0 +1,11 @@
+<form method="POST">
+	<select name="books">
+		{{#each books}}
+  <option value="{{this._id}}">{{this.title}}</option>
+	{{/each}}
+	<input type="submit">
+</select>
+</form>
+
+<br>
+<a href="/">Regresar al Inicio</a>

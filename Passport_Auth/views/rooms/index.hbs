@@ -1,0 +1,27 @@
+<form action="/rooms" method="POST">
+  <div>
+    <label for="name">Name:</label>
+    <input type="text" name="name">
+  </div>
+	<br>
+  <div>
+    <label for="desc">Description:</label>
+    <input type="text" name="desc">
+  </div>
+	<br>
+  {{#if message}}
+    <div class="error-message">{{ message }}</div>
+  {{/if}}
+	<br>
+  <div>
+    <input type="submit" value="Add Room">
+  </div>
+</form>
+
+
+{{#each rooms}}
+	<h2>{{this.name}}</h2>
+	<p>{{this.desc}}</p>
+	<br>
+	<a href="/rooms/delete/{{this.id}}">Borrar</a>
+{{/each}}

@@ -1,0 +1,13 @@
+<h1>{{username}}</h1>
+
+{{#each reservations}}
+<p>{{this.book.title}}</p>
+<p>Fue reservado el : {{this.created_at}}</p>
+<p>Estatus : 
+	{{#if this.returned}}
+	Devuelto
+	{{else}}
+	Pendiente
+	{{/if}}
+	</p>
+{{/each}}

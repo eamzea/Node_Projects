@@ -1,0 +1,12 @@
+{{#each books}}
+<a style="display: block;" href="/books/{{this._id}}">El libro {{this.title}} está 
+	{{#if this.available }} 
+	disponible 
+	{{else}}
+	no disponible
+	{{/if}} </a>
+{{/each}}
+<br>
+<a href="/reserve">Reservar libro</a>
+<a href="/return">Devolver libro</a>
+<a href="/add-book">Añadir libro</a>
