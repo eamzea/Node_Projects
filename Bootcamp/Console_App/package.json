@@ -1,0 +1,24 @@
+{
+  "name": "console-app",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app.ts",
+  "scripts": {
+    "test": "test",
+    "dev": "ts-node src/app.ts",
+    "dev:nodemon": "npx nodemon",
+    "build": "rm -rf ./dist && tsc",
+    "start": "npm run build && node dist/app.js"
+  },
+  "author": "Edgar Zea",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.11.17",
+    "@types/yargs": "^17.0.32",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "yargs": "^17.7.2"
+  }
+}
