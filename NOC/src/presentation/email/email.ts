@@ -3,14 +3,14 @@ import { envs } from '../../config/plugins';
 import { LogEntity, LogSeverityLevel } from '../../domain/entities/log';
 import { LogRepository } from '../../domain/repository/log';
 
-interface SendEmailOptions {
+export interface SendEmailOptions {
   to: string | string[];
   subject: string;
   htmlBody: string;
   attachments?: Attachment[]
 }
 
-interface Attachment {
+export interface Attachment {
   filename: string;
   path: string;
 }
@@ -31,7 +31,7 @@ export class EmailService {
     const { to, subject, htmlBody, attachments = [] } = options;
 
     try {
-      const sentData = await this.transporter.sendMail({
+      await this.transporter.sendMail({
         to,
         subject,
         html: htmlBody,
@@ -45,7 +45,7 @@ export class EmailService {
     }
   }
 
-  async sendEmailWithFileSystemLogs(to: string | string[]) {
+  async sendEmailWithFileSystemLogs(to: SendEmailOptions['to']) {
     const subject = '';
     const htmlBody = ``;
 
