@@ -42,10 +42,7 @@ export class FileSystemDataSource implements LogDataSource {
       return []
     }
 
-    const logs = content.split('\n').filter(log => log !== '').map((log,_,array) => {
-      console.log(log, array)
-      return LogEntity.fromJson(log)
-    })
+    const logs = content.split('\n').filter(log => log !== '').map(LogEntity.fromJson)
 
     return logs
 
