@@ -7,10 +7,10 @@
     "build": "rimraf ./dist && tsc",
     "dev": "NODE_ENV=dev tsnd --respawn --env-file=.env.dev src/app.ts",
     "docker:test": "docker compose -f docker-compose-test.yml --env-file .env.test up -d",
-    "start": "NODE_ENV=prod npm run build && node dist/app.js",
+    "start": "NODE_ENV=dev npm run build && node dist/app.js",
     "test:coverage": "npm run test && jest --coverage",
     "test:watch": "npm run test && jest --watch",
-    "test": "NODE_ENV=test npm run docker:test && jest --env-file=.env.test"
+    "test": "NODE_ENV=dev npm run docker:test && jest --env-file=.env.test"
   },
   "engines": {
     "npm": ">=10.5",
