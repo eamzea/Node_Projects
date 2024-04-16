@@ -2,6 +2,7 @@ import { prisma } from '../../data/postgres';
 import { TodoDataSource } from '../../domain/datasources';
 import { CreateTodoDto, UpdateTodoDto } from '../../domain/dtos';
 import { TodoEntity } from '../../domain/entities';
+import { CustomError } from '../../domain/errors';
 
 export class TodoDSImpl implements TodoDataSource {
   async create(createTodoDto: CreateTodoDto): Promise<TodoEntity> {
@@ -22,7 +23,7 @@ export class TodoDSImpl implements TodoDataSource {
     const todo = await prisma.todo.findFirst({ where: { id } });
 
     if (!todo) {
-      throw `Todo with id:${id} not found`;
+      throw new CustomError(`Todo with id:${id} not found`, 404);
     }
 
     return TodoEntity.fromDB(todo);
