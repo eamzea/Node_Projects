@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { LoginUserDto, RegisterUserDto } from '../../domain/dtos';
 import { AuthService } from '../services/auth.service';
-import { CustomError } from '../../domain';
+import { CustomError } from '../../domain/errors';
 
 export class AuthController {
   constructor(public readonly authService: AuthService) {}
@@ -19,7 +19,7 @@ export class AuthController {
     const [error, registerDto] = RegisterUserDto.create(req.body);
 
     if (error) {
-      return res.status(400).json(error);
+      return res.status(400).json({ error });
     }
 
     this.authService
@@ -32,7 +32,7 @@ export class AuthController {
     const [error, loginDto] = LoginUserDto.login(req.body);
 
     if (error) {
-      return res.status(400).json(error);
+      return res.status(400).json({ error });
     }
 
     this.authService
