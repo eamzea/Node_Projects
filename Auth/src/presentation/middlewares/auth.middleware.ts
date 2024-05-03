@@ -7,6 +7,7 @@ export class AuthMiddleware {
   static async validateJWT(req: Request, res: Response, next: NextFunction) {
     const authorization = req.header('Authorization');
 
+
     if (!authorization) {
       return res.status(401).json({ error: 'Missing token' });
     }

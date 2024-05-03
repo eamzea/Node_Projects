@@ -34,7 +34,7 @@ export class AuthService {
 
       return { user: userEntity, token };
     } catch (error) {
-      throw CustomError.internalServer(`${error}`);
+      throw error instanceof CustomError ? error : CustomError.internalServer(`${error}`);
     }
   }
 
@@ -65,7 +65,7 @@ export class AuthService {
         token,
       };
     } catch (error) {
-      throw CustomError.internalServer(`${error}`);
+      throw error instanceof CustomError ? error : CustomError.internalServer(`${error}`);
     }
   }
 

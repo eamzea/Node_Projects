@@ -27,7 +27,7 @@ export class CategoryService {
         available: category.available,
       };
     } catch (error) {
-      throw CustomError.internalServer(`${error}`);
+      throw error instanceof CustomError ? error : CustomError.internalServer(`${error}`);
     }
   }
 
@@ -55,7 +55,7 @@ export class CategoryService {
         })),
       };
     } catch (error) {
-      throw CustomError.internalServer(`${error}`);
+      throw error instanceof CustomError ? error : CustomError.internalServer(`${error}`);
     }
   }
 }
