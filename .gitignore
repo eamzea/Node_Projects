@@ -11,3 +11,6 @@ coverage/
 logs/
 mongo-*/
 postgres*/
+
+# Local Netlify folder
+.netlify

@@ -7,17 +7,8 @@ export class DiscordService {
 
   async notify(message: string) {
     const body = {
-      content: message,
-      // embeds: [
-      //   {
-      //     image: {
-      //       url: '',
-      //     },
-      //   },
-      // ],
+      content: message
     };
-
-    console.log(message, this.discordWebhookUrl)
 
     const response = await fetch(this.discordWebhookUrl, {
       method: 'POST',
@@ -26,10 +17,6 @@ export class DiscordService {
       },
       body: JSON.stringify(body),
     });
-
-    const data = await response.json()
-
-    console.log(data);
 
     if (!response.ok) {
       console.log('Error sending message');
