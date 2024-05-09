@@ -1,6 +1,8 @@
 import { Handler, HandlerContext, HandlerEvent } from '@netlify/functions';
 import * as crypto from 'crypto';
 
+const GITHUB_SECRET = process.env.GITHUB_SECRET ?? '';
+
 const notify = async (message: string) => {
   const discordWebhookUrl = process.env.DISCORD_WEBHOOK_URL ?? '';
 
@@ -25,24 +27,15 @@ const notify = async (message: string) => {
 };
 
 const verify_signature = (req: HandlerEvent) => {
-  const GITHUB_SECRET = process.env.GITHUB_SECRET ?? '';
-
-  console.log({ GITHUB_SECRET });
-
   try {
     const signature = crypto
       .createHmac('sha256', GITHUB_SECRET)
-      .update(JSON.stringify(req.body))
+      .update(JSON.stringify(JSON.parse(req.body ?? '{}')))
       .digest('hex');
     const xHubSignature = req.headers['x-hub-signature-256'] ?? '';
 
-    console.log({ xHubSignature, signature });
-
     let trusted = Buffer.from(`sha256=${signature}`, 'ascii');
     let untrusted = Buffer.from(xHubSignature, 'ascii');
-
-    console.log({ trusted, untrusted });
-    console.log({ verify_result: crypto.timingSafeEqual(trusted, untrusted) });
 
     return {
       ok: crypto.timingSafeEqual(trusted, untrusted),
